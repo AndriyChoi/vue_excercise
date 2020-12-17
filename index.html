@@ -10,17 +10,53 @@
         {{message}} {{message + message}} 
         <div v-bind:id="message"></div>
         <!-- <div :id="message"></div> -->
-        <ul>
-            <li v-for="item in list">
-                <span v-if="!item.del">{{item.title}}</span>
-                <span v-else style="text-decoration: line-through;">{{item.title}}</span>
-                <button v-show="!item.del">delete</button>
-            </li>
-        </ul>
+        <todo-list></todo-list>
 
     </div>
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
+    Vue.component('todo-item',{
+        props: {
+            title: String,
+            del: {
+                type: Boolean,
+                default: false,
+            }
+        },
+        template:`
+        <li>
+                <span v-if="!del">{{title}}</span>
+                <span v-else style="text-decoration: line-through;">{{title}}</span>
+                <button v-show="!del">delete</button>
+            </li>
+        `,
+        data: function(){
+            return {}
+        },
+        methods: {
+            
+        },
+    })
+    Vue.component('todo-list', {
+        template: `
+        <ul>
+            <todo-item v-for="item in list" :title="item.title" :del="item.del"></todo-item>
+        </ul>
+        `,
+        data: function(){
+            return{
+                list:[{
+                title: 'class1',
+                del: false
+            },
+            {
+                title: 'class2',
+                del: true
+            }
+        ],
+            }
+        }
+    })
     var vm = new Vue({
         el: '#app',
         data: {
@@ -30,8 +66,8 @@
                 del: false
             },
             {
-                title: 'class1',
-                del: false
+                title: 'class2',
+                del: true
             }
         ],
             item: {
