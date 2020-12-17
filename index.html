@@ -16,12 +16,14 @@
                     <span slot="pre-icon">前置图标</span>
                 <span slot="suf-icon">后置图标</span> -->
                 <!-- 新版本语法2.6 -->
-                <template v-slot:pre-icon>
-                    <span>前置图标</span>
+                <!-- 插槽传值 -->
+                <template v-slot:pre-icon="{value}" >
+                    <span>前置图标{{value}}</span>
                 </template>
-                <template v-slot:suf-icon>
+                <!-- 把这个注释后可以有默认值
+                    <template v-slot:suf-icon>
                     <span>前置图标</span>
-                </template>
+                </template> -->
             </todo-item>
         </todo-list>
 
@@ -34,19 +36,21 @@
             del: {
                 type: Boolean,
                 default: false,
-            }
+            },
         },
         template:`
         <li>
-            <slot name="pre-icon"></slot>
+            <slot name="pre-icon" :value="value"></slot>
                 <span v-if="!del">{{title}}</span>
                 <span v-else style="text-decoration: line-through;">{{title}}</span>
-            <slot name="suf-icon"></slot>
+            <slot name="suf-icon">🦐</slot>
                 <button v-show="!del" @click="handleClick">delete</button>
             </li>
         `,
         data: function(){
-            return {}
+            return {
+                value: Math.random()
+            }
         },
         methods: {
             handleClick(){
