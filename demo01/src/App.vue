@@ -10,7 +10,9 @@
         <div v-bind:id="message"></div>
         <!-- <div :id="message"></div> -->
         <todo-list>
-            <todo-item @delete="handleDelete" v-for="item in list" :key="item.title" :title="item.title" :del="item.del">
+          <!-- 此处key和虚拟DOM有关 -->
+          <!-- 当列表变动，用index当成key就有问题。 -->
+            <todo-item @delete="handleDelete" v-for="(item, index) in list" :key="index" :title="item.title" :del="item.del">
                 <!-- 老版本语法
                     <span slot="pre-icon">前置图标</span>
                 <span slot="suf-icon">后置图标</span> -->
