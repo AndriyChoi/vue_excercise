@@ -1,5 +1,9 @@
 <template>
   <div id="app">
+    <!-- 语法糖 -->
+    <input v-model="message">
+    <!-- 复杂方法 -->
+    <input :value="message" @input="handleChange">
     <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
     {{message}} {{message + message}} 
@@ -53,7 +57,10 @@ export default {
   methods: {
     handleDelete(val) {
       console.log('handleDelete', val)
-    }
+    },
+    handleChange(e) {
+      this.message = e.target.value
+    },
   },
 }
 </script>
