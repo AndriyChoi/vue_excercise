@@ -11,7 +11,7 @@ import store from "./store";
 // 引入部分组件
 // import { Button } from "ant-design-vue/lib";
 // 配置babel后可以直接这样写，简化按需加载。
-import { Button, Layout, Icon, Drawer, Radio } from "ant-design-vue";
+import { Button, Layout, Icon, Drawer, Radio, Menu } from "ant-design-vue";
 
 Vue.config.productionTip = false;
 
@@ -20,6 +20,7 @@ Vue.use(Layout);
 Vue.use(Icon);
 Vue.use(Drawer);
 Vue.use(Radio);
+Vue.use(Menu);
 
 new Vue({
   router,
