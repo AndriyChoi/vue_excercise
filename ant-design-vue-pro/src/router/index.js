@@ -137,7 +137,9 @@ const router = new VueRouter({
 
 // to：将要到达的路由，from现在的路由，调用next进行下一步。
 router.beforeEach((to, from, next) => {
-  NProgress.start();
+  if (to.path !== from.path) {
+    NProgress.start();
+  }
   next();
 });
 

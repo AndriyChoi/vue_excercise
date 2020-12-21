@@ -1,15 +1,15 @@
 <template>
   <div id="app">
-    <a-button>按钮</a-button>
-    <div id="nav">
-      <router-link to="/dashboard/analysis">dashboard</router-link> |
-      <router-link to="/form">form</router-link>
-    </div>
+    
     <!-- 用于挂载router中的内容。 -->
     <router-view />
   </div>
 </template>
 
 <style lang="less">
-
+#components-layout-demo-side .logo {
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px;
+}
 </style>
