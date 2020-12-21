@@ -2,8 +2,20 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+//使用less后编译报错
+// import 'ant-design-vue/dist/antd.less';
+// 引入部分样式
+// 配置babel后可以不写样式引入
+// import "ant-design-vue/lib/button/style";
+// import Antd from "ant-design-vue";
+// 引入部分组件
+// import { Button } from "ant-design-vue/lib";
+// 配置babel后可以直接这样写，简化按需加载。
+import { Button } from "ant-design-vue";
 
 Vue.config.productionTip = false;
+
+Vue.use(Button);
 
 new Vue({
   router,
