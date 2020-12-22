@@ -7,7 +7,6 @@
       placement="right"
       :closable="false"
       :visible="visible"
-      :after-visible-change="afterVisibleChange"
       @close="onClose"
     >
       <template v-slot:handle>

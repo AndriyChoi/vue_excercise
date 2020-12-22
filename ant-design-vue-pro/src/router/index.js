@@ -11,6 +11,7 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/user",
+    hideInMenu: true,
     // 简单方法，不需要利用新的组件去挂载到APP.vue的对应节点
     // component: { render: h => h("router-view") },
     // component: RenderRouterView,
@@ -70,7 +71,7 @@ const routes = [
         path: "/form",
         name: "form",
         component: { render: h => h("router-view") },
-        meta: { icon: "form", title: "表单", authority: ["admin"] },
+        meta: { icon: "form", title: "表单" },
         children: [
           {
             path: "/form/basic-form",
@@ -124,6 +125,7 @@ const routes = [
   {
     path: "*",
     name: "404",
+    hideInMenu: true,
     component: NotFound
   }
 ];
