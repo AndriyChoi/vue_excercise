@@ -8,7 +8,7 @@
 import Chart from "../../components/Chart";
 // import random from "lodash/random";
 import request from "../../utils/request";
-import axios from "axios";
+// import axios from "axios";
 export default {
   components: {
     Chart,
