@@ -3,6 +3,10 @@ import VueRouter from "vue-router";
 import NotFound from "../views/404.vue";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
+import findLast from "lodash/findLast";
+import { notification } from "ant-design-vue";
+import { check, isLogin } from "../utils/auth";
+import Forbidden from "../views/403.vue";
 // import RenderRouterView from "../components/RenderRouterView";
 
 Vue.use(VueRouter);
@@ -71,7 +75,7 @@ const routes = [
         path: "/form",
         name: "form",
         component: { render: h => h("router-view") },
-        meta: { icon: "form", title: "表单" },
+        meta: { icon: "form", title: "表单", authority: ["admin"] },
         children: [
           {
             path: "/form/basic-form",
@@ -123,6 +127,12 @@ const routes = [
     ]
   },
   {
+    path: "/403",
+    name: "403",
+    hideInMenu: true,
+    component: Forbidden
+  },
+  {
     path: "*",
     name: "404",
     hideInMenu: true,
@@ -141,6 +151,28 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   if (to.path !== from.path) {
     NProgress.start();
+  }
+  // 即将访问的路由to.matched中取得数组，找到最近的authority元信息，如果找到了就可以进行处理。
+  const record = findLast(to.matched, record => record.meta.authority);
+  if (record && !check(record.meta.authority)) {
+    // 此时没有权限，再判断是否登陆
+    // 查看路由是否已经跳转，如果已经跳转则不触发next
+    if (!isLogin() && to.path !== "/user/login") {
+      next({
+        path: "/user/login"
+      });
+    } else if (to.path !== "/403") {
+      // 如果已经登陆
+      notification.error({
+        message: "403",
+        description: "您没有权限访问该页面，如有需要请联系管理员。"
+      });
+      next({
+        path: "/403"
+      });
+    }
+    // 由于上述已经next（），不会进入下一步的afterEach，所以需要手动禁用
+    NProgress.done();
   }
   next();
 });
