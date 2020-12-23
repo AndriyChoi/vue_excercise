@@ -7,6 +7,7 @@
 <script>
 import Chart from "../../components/Chart";
 // import random from "lodash/random";
+import request from "../../utils/request";
 import axios from "axios";
 export default {
   components: {
@@ -31,9 +32,14 @@ export default {
   },
   methods: {
     getChartData() {
-      // get的同时传递参数，当参数返回调用then
-      axios
-        .get("/api/dashboard/chart", { params: { ID: 12345 } })
+      request({
+        url: "/api/dashboard/chart",
+        methods: "get",
+        params: { ID: 12345 },
+      })
+        // get的同时传递参数，当参数返回调用then
+        // axios
+        //   .get("/api/dashboard/chart", { params: { ID: 12345 } })
         .then(response => {
           this.chartOption = {
             title: {
@@ -48,7 +54,7 @@ export default {
               {
                 name: "销量",
                 type: "bar",
-                data: response.data
+                data: response.data,
               },
             ],
           };

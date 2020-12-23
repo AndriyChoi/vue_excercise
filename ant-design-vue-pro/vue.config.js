@@ -17,7 +17,7 @@ module.exports = {
           if (req.headers.accept.indexOf("html") !== -1) {
             console.log("Skipping proxy for browser request.");
             return "/index.html";
-          } else {
+          } else if (process.env.MOCK !== "none") {
             // 将非html请求截获，对路由字符串进行处理，返回对应js文件的名称。
             const name = req.path
               .split("/api/")[1]
