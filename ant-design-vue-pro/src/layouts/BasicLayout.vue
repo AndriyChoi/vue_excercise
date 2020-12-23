@@ -17,6 +17,7 @@
       <a-layout>
         <a-layout-header style="background: #fff; padding: 0">
           <a-icon
+            v-auth="['admin']"
             class="trigger"
             :type="collapsed ? 'menu-unfold' : 'menu-fold'"
             @click="collapsed = !collapsed"
@@ -31,7 +32,9 @@
         </a-layout-footer>
       </a-layout>
     </a-layout>
-    <SettingDrawer />
+    <Authorized :authority="['admin']">
+      <SettingDrawer />
+    </Authorized>
   </div>
 </template>
 
@@ -40,12 +43,14 @@ import Header from "./Header";
 import Footer from "./Footer";
 import SiderMenu from "./SiderMenu";
 import SettingDrawer from "../components/SettingDrawer/index";
+import Authorized from "../components/Authorized.vue";
 export default {
   components: {
     Header,
     Footer,
     SiderMenu,
     SettingDrawer,
+    Authorized,
   },
   data() {
     SiderMenu;
