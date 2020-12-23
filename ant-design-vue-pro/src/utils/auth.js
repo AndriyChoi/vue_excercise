@@ -1,6 +1,6 @@
 export function getCurrentAuthority() {
   // 假装已经获取权限。
-  return ["user"];
+  return ["admin"];
 }
 
 export function check(authority) {
